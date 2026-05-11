@@ -16,10 +16,24 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.toggle('active');
         });
 
-        // 点击导航链接后关闭菜单
-        navMenu.querySelectorAll('a').forEach(function(link) {
+        // 移动端：点击带子菜单的项展开/收起
+        navMenu.querySelectorAll('.has-submenu > a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    var li = this.parentElement;
+                    li.classList.toggle('open');
+                    li.querySelector('.submenu').classList.toggle('open');
+                }
+            });
+        });
+
+        // 点击导航链接后关闭菜单（仅对没有子菜单的链接）
+        navMenu.querySelectorAll('a:not(.has-submenu > a)').forEach(function(link) {
             link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                }
             });
         });
     }
@@ -32,6 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const href = link.getAttribute('href');
         if (href === currentPath) {
             link.classList.add('active');
+        }
+    });
+    // 子菜单页面打开时，主导航也高亮
+    navMenu.querySelectorAll('.has-submenu').forEach(function(li) {
+        var subLinks = li.querySelectorAll('.submenu a');
+        var match = false;
+        subLinks.forEach(function(sl) {
+            if (sl.classList.contains('active')) match = true;
+        });
+        if (match) {
+            li.querySelector('> a').classList.add('active');
         }
     });
 

@@ -217,6 +217,61 @@ a:hover {
     background: rgba(196, 59, 34, 0.06);
 }
 
+/* 子菜单（下拉） */
+.nav-menu li.has-submenu {
+    position: relative;
+}
+
+.nav-menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 140px;
+    background: var(--paper);
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    padding: 0.4rem 0;
+    list-style: none;
+    z-index: 100;
+}
+
+.nav-menu .submenu a {
+    padding: 0.45rem 1rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    border-radius: 0;
+    background: transparent;
+}
+
+.nav-menu .submenu a:hover {
+    background: rgba(196, 59, 34, 0.06);
+}
+
+/* PC hover 展开 */
+@media (min-width: 769px) {
+    .nav-menu li.has-submenu:hover > .submenu {
+        display: block;
+    }
+}
+
+/* 带子菜单的导航项右侧小箭头 */
+.has-submenu > a {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+.has-submenu > a::after {
+    content: '▾';
+    font-size: 0.7rem;
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+}
+.has-submenu:hover > a::after {
+    transform: rotate(180deg);
+}
+
 /* 搜索按钮 */
 .search-btn {
     background: none;
@@ -939,6 +994,35 @@ a:hover {
     }
     .nav-menu a:last-child {
         border-bottom: none;
+    }
+
+    /* 移动端子菜单折叠 */
+    .nav-menu .submenu {
+        display: none;
+        position: static;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0 0 0 1rem;
+        background: rgba(0,0,0,0.02);
+    }
+    .nav-menu .submenu.open {
+        display: block;
+    }
+    .nav-menu .submenu a {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.82rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+    .nav-menu .submenu a:last-child {
+        border-bottom: none;
+    }
+    .has-submenu > a::after {
+        content: '▸';
+        margin-left: auto;
+    }
+    .has-submenu.open > a::after {
+        transform: rotate(90deg);
     }
 
     h1 { font-size: 1.8rem; }
