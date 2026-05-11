@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://yijing.academy/</loc><priority>1.0</priority><changefreq>daily</changefreq></url>
+  <url><loc>https://yijing.academy/basics.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://yijing.academy/yinyang-bagua.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://yijing.academy/wuxing-ganzhi.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://yijing.academy/liuyao.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://yijing.academy/glossary.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://yijing.academy/hexagrams.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://yijing.academy/daily-quotes.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://yijing.academy/wuyun-liuqi-2026.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://yijing.academy/tools.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://yijing.academy/daily-fortune.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://yijing.academy/ganzhi-converter.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://yijing.academy/divination.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://yijing.academy/wuxing-chart.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://yijing.academy/solar-terms.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+</urlset>

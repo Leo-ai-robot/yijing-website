@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f5f0e8"/>
+  
+  <!-- 太极暗纹背景 -->
+  <g opacity="0.04" transform="translate(350, 115)">
+    <circle cx="250" cy="250" r="240" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+    <path d="M250 10 A240 240 0 0 0 250 490 A240 240 0 0 1 250 10" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+    <circle cx="250" cy="130" r="40" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+    <circle cx="250" cy="370" r="40" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+  </g>
+
+  <!-- 暖色径向渐变 -->
+  <radialGradient id="warm" cx="15%" cy="30%">
+    <stop offset="0%" stop-color="#8b4513" stop-opacity="0.04"/>
+    <stop offset="100%" stop-color="#f5f0e8" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#warm)"/>
+
+  <!-- 冷色径向渐变 -->
+  <radialGradient id="cool" cx="85%" cy="70%">
+    <stop offset="0%" stop-color="#8a9ba8" stop-opacity="0.03"/>
+    <stop offset="100%" stop-color="#f5f0e8" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#cool)"/>
+
+  <!-- Logo 小太极 -->
+  <g transform="translate(60, 50)" opacity="0.6">
+    <circle cx="25" cy="25" r="22" fill="none" stroke="#8b4513" stroke-width="1.5"/>
+    <path d="M25 3 A22 22 0 0 0 25 47 A22 22 0 0 1 25 3" fill="none" stroke="#8b4513" stroke-width="1"/>
+    <circle cx="25" cy="13" r="4" fill="none" stroke="#8b4513" stroke-width="0.8"/>
+    <circle cx="25" cy="37" r="4" fill="none" stroke="#8b4513" stroke-width="0.8"/>
+  </g>
+
+  <!-- 标题 -->
+  <text x="600" y="280" text-anchor="middle" font-family="'ZCOOL XiaoWei','STKaiti',serif" font-size="76" fill="#1a1a1a" letter-spacing="12">易学书院</text>
+
+  <!-- 副标题 -->
+  <text x="600" y="350" text-anchor="middle" font-family="'Noto Serif SC','STSong',serif" font-size="28" fill="#555555" letter-spacing="6">周易国学文化学习平台</text>
+
+  <!-- 底部网址 -->
+  <text x="600" y="540" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="18" fill="#888888" letter-spacing="3">yijing.academy</text>
+
+  <!-- 底部极细分隔线 -->
+  <line x1="400" y1="500" x2="800" y2="500" stroke="#ddd6c8" stroke-width="1"/>
+</svg>
