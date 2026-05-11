@@ -1425,6 +1425,59 @@ a:hover {
 .related-card .rc-desc { font-size: 0.75rem; color: var(--ink-gray); margin-top: 0.2rem; }
 @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr; } }
 
+/* --- 商业入口（轻量预埋）--- */
+.commercial-entrance {
+    text-align: center;
+    margin: var(--space-md) 0;
+}
+.commercial-entrance .ce-line {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    font-family: var(--font-sans);
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+.commercial-entrance .ce-links {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+.commercial-entrance .ce-link {
+    padding: 0.3rem 1.2rem;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--cinnabar);
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+}
+.commercial-entrance .ce-link:hover {
+    border-color: var(--cinnabar);
+    background: var(--cinnabar);
+    color: #fff;
+}
+
+/* --- 商业服务区块 --- */
+.business-services { text-align: center; margin: var(--space-lg) 0; padding: var(--space-md) 0; }
+.business-services .bs-title { font-size: 1.05rem; color: var(--ink-black); font-family: var(--font-title); letter-spacing: 2px; margin-bottom: var(--space-xs); }
+.business-services .bs-subtitle { font-size: 0.82rem; color: var(--ink-light); margin-bottom: var(--space-md); }
+.bs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); max-width: 900px; margin: 0 auto; }
+.bs-card {
+    display: block; padding: var(--space-md); background: var(--paper-dark); border-radius: 8px;
+    border: 1px solid var(--border-light); text-decoration: none; transition: all 0.3s;
+    text-align: center;
+}
+.bs-card:hover { border-color: var(--cinnabar); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.bs-card .bs-icon { font-size: 1.8rem; margin-bottom: var(--space-xs); }
+.bs-card h4 { font-size: 0.95rem; color: var(--ink-black); font-family: var(--font-title); letter-spacing: 1px; margin-bottom: var(--space-xs); }
+.bs-card p { font-size: 0.78rem; color: var(--ink-gray); line-height: 1.6; margin-bottom: var(--space-sm); }
+.bs-card .bs-link { font-size: 0.8rem; color: var(--cinnabar); letter-spacing: 1px; }
+@media (max-width: 600px) { .bs-grid { grid-template-columns: 1fr; } }
+
 /* --- 轻反馈 --- */
 .feedback-section { text-align: center; margin: var(--space-md) 0; }
 .feedback-section .fb-label { font-size: 0.82rem; color: var(--ink-light); font-family: var(--font-sans); letter-spacing: 1px; margin-bottom: var(--space-xs); }
