@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="五行格局速查 - 输入天干地支，即时查询五行属性、阴阳、纳音及生克关系。">
+<meta name="keywords" content="五行,天干,地支,纳音,生克,六十甲子">
+<title>五行格局速查 | 周易国学文化学习平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.tool-section{background:var(--paper-dark);border-radius:8px;padding:var(--space-md);margin-bottom:var(--space-md)}
+.tool-section h3{margin-bottom:var(--space-sm);font-family:var(--font-title);letter-spacing:1px}
+.select-row{display:flex;gap:var(--space-sm);flex-wrap:wrap;align-items:center}
+.select-row select{padding:0.5rem;border:1px solid var(--border-light);border-radius:4px;font-size:0.95rem;background:var(--paper);color:var(--ink-black)}
+.wuxing-bar{display:flex;gap:0.5rem;justify-content:center;margin:var(--space-sm) 0}
+.wuxing-dot{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:#fff;opacity:0.2;transition:all 0.3s}
+.wuxing-dot.active{opacity:1;transform:scale(1.1)}
+.wx-mu{background:#4caf50}.wx-huo{background:#f44336}.wx-tu{background:#ff9800}.wx-jin{background:#9e9e9e}.wx-shui{background:#2196f3}
+.result-card{background:var(--paper);border:1px solid var(--border-light);border-radius:8px;padding:var(--space-md);text-align:center;margin-top:var(--space-sm)}
+.result-card .big{font-size:2rem;font-family:var(--font-title);letter-spacing:4px;color:var(--cinnabar)}
+.result-card .detail{font-size:0.9rem;color:var(--ink-gray);margin-top:0.3rem}
+.compare-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--space-sm);align-items:center;margin-top:var(--space-sm)}
+.compare-col{text-align:center;padding:var(--space-sm);background:var(--paper);border:1px solid var(--border-light);border-radius:6px}
+.compare-arrow{font-size:1.5rem;color:var(--cinnabar);padding:0 0.5rem}
+</style>
+</head>
+<body>
+<div class="announcement-bar">🌿 易学书院 · 专注国学哲学 · 弘扬传统文化 · 2026 丙午年五运六气专题已上线</div>
+<header class="site-header">
+<div class="header-inner">
+<div class="logo">
+<svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="none" stroke="#c23b22" stroke-width="1.5" opacity="0.4"/><path d="M50 15 A35 35 0 0 0 50 85 A35 35 0 0 1 50 15" fill="#1a1a1a" opacity="0.8"/><circle cx="50" cy="35" r="6" fill="#f5f0e8"/><circle cx="50" cy="65" r="6" fill="#1a1a1a" opacity="0.8"/></svg>
+<div><div class="logo-text"><span>易</span>学书院</div><div class="logo-sub">YIJING ACADEMY</div></div>
+</div>
+<button class="nav-toggle" id="navToggle">☰</button>
+<ul class="nav-menu" id="navMenu">
+<li><a href="index.html">首页</a></li>
+<li class="has-submenu"><a href="basics.html">易学入门</a><ul class="submenu">
+<li><a href="basics.html">入门基础</a></li><li><a href="yinyang-bagua.html">阴阳八卦</a></li><li><a href="wuxing-ganzhi.html">五行干支</a></li><li><a href="liuyao.html">六爻入门</a></li><li><a href="glossary.html">术语速查</a></li>
+</ul></li>
+<li class="has-submenu"><a href="hexagrams.html">六十四卦</a><ul class="submenu">
+<li><a href="hexagrams.html">全部卦象</a></li><li><a href="daily-quotes.html">卦辞金句</a></li>
+</ul></li>
+<li class="has-submenu"><a href="wuyun-liuqi-2026.html">五运六气</a><ul class="submenu">
+<li><a href="wuyun-liuqi-2026.html">丙午年专题</a></li>
+</ul></li>
+<li class="has-submenu"><a href="tools.html">易学工具</a><ul class="submenu">
+<li><a href="daily-fortune.html">每日宜忌</a></li><li><a href="ganzhi-converter.html">干支转换器</a></li><li><a href="divination.html">简易起卦</a></li><li><a href="wuxing-chart.html">五行格局</a></li><li><a href="solar-terms.html">节气对照</a></li>
+</ul></li>
+</ul>
+<button class="search-btn" id="searchBtn" title="搜索">🔍</button>
+</div>
+</header>
+<main>
+<section class="page-banner"><div class="container"><h1>五行格局速查</h1><p class="breadcrumb"><a href="index.html">首页</a> › <a href="tools.html">易学工具</a> › 五行格局速查</p></div></section>
+<section class="page-content"><div class="content-container">
+
+<div class="tool-section">
+<h3>🔍 干支查询</h3>
+<div class="select-row">
+<label>六十甲子：</label>
+<select id="jiaziSelect" style="min-width:180px;"></select>
+</div>
+<div id="singleResult" class="result-card">
+<div class="big" id="gzDisplay">—</div>
+<div class="wuxing-bar" id="wxBar"></div>
+<div class="detail" id="gzDetail"></div>
+</div>
+</div>
+
+<div class="tool-section">
+<h3>⚖️ 生克对比</h3>
+<div class="select-row">
+<label>干支一：</label><select id="cmp1Select" style="min-width:160px;"></select>
+<label>干支二：</label><select id="cmp2Select" style="min-width:160px;"></select>
+</div>
+<div id="cmpResult"></div>
+</div>
+
+<p style="text-align:center;font-size:0.8rem;color:var(--ink-light);margin:var(--space-md) 0;">仅供传统文化学术研究参考 · <a href="wuxing-ganzhi.html" style="color:var(--cinnabar);">了解五行干支理论 →</a></p>
+
+<div style="text-align:center;padding:var(--space-sm) 0;border-top:1px solid var(--border-light);font-size:0.85rem;">
+<a href="daily-fortune.html" style="color:var(--cinnabar);text-decoration:none;">← 每日宜忌</a>
+<span style="margin:0 0.8rem;color:var(--border-light);">|</span>
+<a href="ganzhi-converter.html" style="color:var(--cinnabar);text-decoration:none;">干支转换器</a>
+<span style="margin:0 0.8rem;color:var(--border-light);">|</span>
+<a href="divination.html" style="color:var(--cinnabar);text-decoration:none;">简易起卦</a>
+<span style="margin:0 0.8rem;color:var(--border-light);">|</span>
+<a href="solar-terms.html" style="color:var(--cinnabar);text-decoration:none;">节气对照 →</a>
+</div>
+
+</div></section>
+</main>
+<footer class="site-footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>易学书院</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-align:left;">专注易经国学哲学、传统文化科普，弘扬中华经典智慧。以文化为根，以哲学为本。</p></div>
+<div class="footer-col"><h4>快速导航</h4><ul><li><a href="index.html">首页</a></li><li><a href="basics.html">易经入门</a></li><li><a href="hexagrams.html">六十四卦全解</a></li></ul></div>
+<div class="footer-col"><h4>常用工具</h4><ul><li><a href="daily-fortune.html">每日宜忌</a></li><li><a href="ganzhi-converter.html">干支转换</a></li><li><a href="divination.html">简易起卦</a></li><li><a href="glossary.html">术语词典</a></li>
+                    <li><a href="bookmarks.html">🔖 我的收藏</a></li></ul></div>
+<div class="footer-col"><h4>关于本站</h4><ul><li><a href="index.html">国学文化平台</a></li><li style="color:rgba(255,255,255,0.3);font-size:0.8rem;">仅供传统文化学习研究</li><li style="color:rgba(255,255,255,0.3);font-size:0.8rem;">坚决反对封建迷信</li></ul></div>
+</div>
+<div class="footer-bottom">© 2026 易学书院 · 传承国学经典 · 弘扬传统文化<br>本站内容仅供学术研究参考，不涉及任何占卜预测服务</div>
+</div></footer>
+<div class="search-overlay" id="searchOverlay"><button class="search-close" id="searchClose">✕</button><div class="search-overlay-inner"><input type="text" id="searchInput" placeholder="搜索易学知识..." autocomplete="off"><div class="search-results"></div></div></div>
+<script src="js/tools-data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+var T = window.TOOLS_DATA;
+
+// 生成六十甲子列表
+var jiaziList = [];
+for (var i = 0; i < 60; i++) {
+    var g = T.TIAN_GAN[i % 10];
+    var z = T.DI_ZHI[i % 12];
+    jiaziList.push(g + z);
+}
+
+function populateSelect(selId, selected) {
+    var sel = document.getElementById(selId);
+    sel.innerHTML = '';
+    jiaziList.forEach(function(jz) {
+        var o = document.createElement('option');
+        o.value = jz;
+        o.textContent = jz + ' · ' + (T.NAYIN[jz] || '');
+        if (jz === selected) o.selected = true;
+        sel.appendChild(o);
+    });
+}
+
+populateSelect('jiaziSelect', '甲子');
+populateSelect('cmp1Select', '甲子');
+populateSelect('cmp2Select', '丙午');
+
+function getWxClass(wx) {
+    return {木:'wx-mu',火:'wx-huo',土:'wx-tu',金:'wx-jin',水:'wx-shui'}[wx] || '';
+}
+
+function updateSingle() {
+    var jz = document.getElementById('jiaziSelect').value;
+    var g = jz[0], z = jz[1];
+    var gWx = T.GAN_WUXING[g], zWx = T.ZHI_WUXING[z];
+    var nayin = T.NAYIN[jz] || '—';
+    var gi = T.TIAN_GAN.indexOf(g), zi = T.DI_ZHI.indexOf(z);
+    var yy = (gi % 2 === 0) ? '阳' : '阴';
+
+    document.getElementById('gzDisplay').textContent = jz;
+    var bar = document.getElementById('wxBar');
+    bar.innerHTML = T.WU_XING.map(function(wx) {
+        var active = (wx === gWx || wx === zWx) ? ' active' : '';
+        return '<div class="wuxing-dot ' + getWxClass(wx) + active + '">' + wx + '</div>';
+    }).join('');
+    document.getElementById('gzDetail').innerHTML =
+        '天干 ' + g + '：' + gWx + yy + ' &nbsp;|&nbsp; 地支 ' + z + '：' + zWx + ' · ' + T.ZHI_SHENGXIAO[z] +
+        ' &nbsp;|&nbsp; 纳音：' + nayin;
+}
+
+function updateCompare() {
+    var jz1 = document.getElementById('cmp1Select').value;
+    var jz2 = document.getElementById('cmp2Select').value;
+    if (jz1 === jz2) { document.getElementById('cmpResult').innerHTML = '<div class="result-card"><p style="color:var(--ink-light);">请选择两个不同的干支进行对比</p></div>'; return; }
+
+    var g1 = jz1[0], z1 = jz1[1], g2 = jz2[0], z2 = jz2[1];
+    var wx1 = T.GAN_WUXING[g1], wx2 = T.GAN_WUXING[g2];
+
+    function rel(a, b) {
+        if (T.SHENG[a] === b) return a + '生' + b + '（相生）';
+        if (T.SHENG[b] === a) return b + '生' + a + '（相生）';
+        if (T.KE[a] === b) return a + '克' + b + '（相克）';
+        if (T.KE[b] === a) return b + '克' + a + '（相克）';
+        return a + '与' + b + '（比和）';
+    }
+
+    document.getElementById('cmpResult').innerHTML =
+        '<div class="compare-grid">' +
+        '<div class="compare-col"><div style="font-size:1.3rem;font-family:var(--font-title);letter-spacing:2px;color:var(--cinnabar)">' + jz1 + '</div><div>' + wx1 + '</div></div>' +
+        '<div class="compare-arrow">⇄</div>' +
+        '<div class="compare-col"><div style="font-size:1.3rem;font-family:var(--font-title);letter-spacing:2px;color:var(--cinnabar)">' + jz2 + '</div><div>' + wx2 + '</div></div>' +
+        '</div>' +
+        '<div class="result-card" style="margin-top:var(--space-sm)"><strong>五行关系：</strong>' + rel(wx1, wx2) + '</div>';
+}
+
+document.getElementById('jiaziSelect').addEventListener('change', updateSingle);
+document.getElementById('cmp1Select').addEventListener('change', updateCompare);
+document.getElementById('cmp2Select').addEventListener('change', updateCompare);
+
+updateSingle();
+updateCompare();
+
+document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navMenu').classList.toggle('active');
+});
+});
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

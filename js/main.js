@@ -272,8 +272,56 @@ document.addEventListener('DOMContentLoaded', function() {
     generateGanzhiCalendar();
 
     // =========================================
-    // 6. 每日易学语录动态加载
+    // 6. 每日易学语录动态加载 + 交互按钮
     // =========================================
+    function showToast(msg) {
+        var t = document.querySelector('.toast');
+        if (!t) {
+            t = document.createElement('div'); t.className = 'toast';
+            document.body.appendChild(t);
+        }
+        t.textContent = msg; t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(function() { t.classList.remove('show'); }, 2000);
+    }
+
+    function getBookmarks() {
+        try { return JSON.parse(localStorage.getItem('yijing_bookmarks') || '[]'); } catch(e) { return []; }
+    }
+    function saveBookmarks(list) {
+        localStorage.setItem('yijing_bookmarks', JSON.stringify(list));
+    }
+    function isBookmarked(id) {
+        return getBookmarks().some(function(b) { return b.id === id; });
+    }
+    function toggleBookmark(id, data) {
+        var list = getBookmarks();
+        var idx = list.findIndex(function(b) { return b.id === id; });
+        if (idx >= 0) { list.splice(idx, 1); saveBookmarks(list); return false; }
+        else { list.push(data); saveBookmarks(list); return true; }
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(function() { showToast('📋 已复制'); });
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            document.execCommand('copy'); document.body.removeChild(ta);
+            showToast('📋 已复制');
+        }
+    }
+
+    function shareText(text, url) {
+        var full = text + '\n—— 来自易学书院\n' + url;
+        if (navigator.share) {
+            navigator.share({ title: '易学语录', text: full });
+        } else {
+            copyText(full);
+        }
+    }
+
     function loadDailyQuote() {
         const container = document.getElementById('dailyQuoteContainer');
         if (!container) return;
@@ -301,46 +349,131 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '君子以遏恶扬善，顺天休命', source: '《周易·大有卦·象传》', translation: '君子制止邪恶，弘扬善行，顺应天道美好的使命。' }
         ];
 
-        // Use date-based deterministic selection
         const today = new Date();
         const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (24 * 60 * 60 * 1000));
         const quote = quotes[dayOfYear % quotes.length];
+        var quoteId = 'q-' + dayOfYear;
+        var bookmarked = isBookmarked(quoteId);
 
         container.innerHTML =
             '<div class="quote-card">' +
             '<blockquote>' + quote.text + '</blockquote>' +
             '<div class="quote-source">—— ' + quote.source + '</div>' +
             '<div class="quote-translation">' + quote.translation + '</div>' +
+            '<div class="daily-actions">' +
+            '<button class="act-copy" data-text="' + quote.text.replace(/"/g,'&quot;') + '">📋 复制</button>' +
+            '<button class="act-bookmark ' + (bookmarked ? 'bookmarked' : '') + '" data-id="' + quoteId + '" data-title="' + quote.text + '" data-source="' + quote.source.replace(/"/g,'&quot;') + '">' + (bookmarked ? '🔖 已收藏' : '🔖 收藏') + '</button>' +
+            '<button class="act-share" data-text="' + quote.text.replace(/"/g,'&quot;') + '" data-source="' + quote.source.replace(/"/g,'&quot;') + '">↗ 分享</button>' +
+            '</div>' +
             '</div>';
+
+        // 复制
+        container.querySelector('.act-copy').addEventListener('click', function() {
+            var text = this.getAttribute('data-text');
+            var src = container.querySelector('.act-share').getAttribute('data-source');
+            copyText('「' + text + '」\n—— ' + src);
+        });
+        // 收藏
+        container.querySelector('.act-bookmark').addEventListener('click', function() {
+            var id = this.getAttribute('data-id');
+            var title = this.getAttribute('data-title');
+            var source = this.getAttribute('data-source');
+            var now = new Date();
+            var nowStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+            var added = toggleBookmark(id, { id: id, type: 'quote', title: title, url: 'daily-quotes.html', excerpt: source, createdAt: nowStr });
+            if (added) {
+                this.textContent = '🔖 已收藏'; this.classList.add('bookmarked');
+                showToast('🔖 已收藏');
+            } else {
+                this.textContent = '🔖 收藏'; this.classList.remove('bookmarked');
+                showToast('已取消收藏');
+            }
+        });
+        // 分享
+        container.querySelector('.act-share').addEventListener('click', function() {
+            var text = this.getAttribute('data-text');
+            var source = this.getAttribute('data-source');
+            shareText('「' + text + '」\n—— ' + source, window.location.href);
+        });
     }
 
     loadDailyQuote();
 
     // =========================================
-    // 7. 回到顶部
+    // 6b. 每日卦象
+    // =========================================
+    function loadDailyHexagram() {
+        var container = document.getElementById('dailyHexagramContainer');
+        if (!container) return;
+        var T = window.TOOLS_DATA;
+        if (!T || !T.HEXAGRAM_DATA) return;
+
+        var today = new Date();
+        var daySeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+        var hex = T.HEXAGRAM_DATA[daySeed % 64];
+
+        container.innerHTML =
+            '<div class="daily-hexagram">' +
+            '<div class="hex-symbol">' + hex.symbol + '</div>' +
+            '<div class="hex-name">' + hex.name + ' · 第' + hex.no + '卦</div>' +
+            '<div class="hex-desc">' + hex.desc + '</div>' +
+            '<a class="hex-link" href="divination.html">🎲 起卦详解 →</a>' +
+            '</div>';
+    }
+
+    loadDailyHexagram();
+
+    // =========================================
+    // 7. 回到顶部（升级）
     // =========================================
     var backToTop = document.createElement('button');
+    backToTop.className = 'back-to-top';
     backToTop.innerHTML = '↑';
-    backToTop.style.cssText =
-        'position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;' +
-        'border-radius:50%;background:var(--ink-black);color:var(--dark-gold-light);' +
-        'border:none;font-size:1.2rem;cursor:pointer;z-index:999;' +
-        'opacity:0;visibility:hidden;transition:all 0.3s ease;' +
-        'box-shadow:0 2px 10px rgba(0,0,0,0.2);';
     document.body.appendChild(backToTop);
 
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            backToTop.style.opacity = '0.6';
-            backToTop.style.visibility = 'visible';
+        if (window.scrollY > 400) {
+            backToTop.classList.add('visible');
         } else {
-            backToTop.style.opacity = '0';
-            backToTop.style.visibility = 'hidden';
+            backToTop.classList.remove('visible');
         }
     });
 
     backToTop.addEventListener('click', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // =========================================
+    // 8. 常用工具悬浮入口
+    // =========================================
+    var floatBtn = document.createElement('button');
+    floatBtn.className = 'tool-float-btn';
+    floatBtn.innerHTML = '☯';
+    document.body.appendChild(floatBtn);
+
+    var panel = document.createElement('div');
+    panel.className = 'tool-float-panel';
+    panel.innerHTML =
+        '<div class="panel-title">📌 常用工具</div>' +
+        '<a href="daily-fortune.html">📅 每日宜忌</a>' +
+        '<a href="ganzhi-converter.html">🔄 干支转换</a>' +
+        '<a href="divination.html">🎲 起卦</a>' +
+        '<a href="wuxing-chart.html">⚖️ 五行格局</a>' +
+        '<a href="solar-terms.html">🌿 节气</a>' +
+        '<div class="panel-divider"></div>' +
+        '<a href="glossary.html">📖 术语词典</a>' +
+        '<a href="daily-quotes.html">💬 每日语录</a>';
+    document.body.appendChild(panel);
+
+    floatBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        panel.classList.toggle('open');
+    });
+    document.addEventListener('click', function() {
+        panel.classList.remove('open');
+    });
+    panel.addEventListener('click', function(e) {
+        e.stopPropagation();
     });
 
     console.log('🧿 易学国学文化平台已加载 — 传承经典，弘扬国学');

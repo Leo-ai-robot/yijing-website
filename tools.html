@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="易学工具合集 - 每日宜忌、干支转换、简易起卦、五行格局、节气对照，纯前端易学实用工具。">
+<meta name="keywords" content="易学工具,每日宜忌,干支转换,起卦,五行,节气">
+<title>易学工具 | 周易国学文化学习平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md);margin:var(--space-md) 0}
+.tool-card{background:var(--paper);border:1px solid var(--border-light);border-radius:8px;padding:var(--space-md);text-align:center;transition:all 0.3s;text-decoration:none;color:inherit;display:block}
+.tool-card:hover{border-color:var(--cinnabar);transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.06)}
+.tool-card .card-icon{font-size:2.5rem;margin-bottom:var(--space-sm)}
+.tool-card .card-title{font-size:1.1rem;font-family:var(--font-title);letter-spacing:2px;color:var(--ink-black);margin-bottom:0.3rem}
+.tool-card .card-desc{font-size:0.82rem;color:var(--ink-gray);line-height:1.6}
+</style>
+</head>
+<body>
+<div class="announcement-bar">🌿 易学书院 · 专注国学哲学 · 弘扬传统文化 · 2026 丙午年五运六气专题已上线</div>
+<header class="site-header">
+<div class="header-inner">
+<div class="logo">
+<svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="none" stroke="#c23b22" stroke-width="1.5" opacity="0.4"/><path d="M50 15 A35 35 0 0 0 50 85 A35 35 0 0 1 50 15" fill="#1a1a1a" opacity="0.8"/><circle cx="50" cy="35" r="6" fill="#f5f0e8"/><circle cx="50" cy="65" r="6" fill="#1a1a1a" opacity="0.8"/></svg>
+<div><div class="logo-text"><span>易</span>学书院</div><div class="logo-sub">YIJING ACADEMY</div></div>
+</div>
+<button class="nav-toggle" id="navToggle">☰</button>
+<ul class="nav-menu" id="navMenu">
+<li><a href="index.html">首页</a></li>
+<li class="has-submenu"><a href="basics.html">易学入门</a><ul class="submenu">
+<li><a href="basics.html">入门基础</a></li><li><a href="yinyang-bagua.html">阴阳八卦</a></li><li><a href="wuxing-ganzhi.html">五行干支</a></li><li><a href="liuyao.html">六爻入门</a></li><li><a href="glossary.html">术语速查</a></li>
+</ul></li>
+<li class="has-submenu"><a href="hexagrams.html">六十四卦</a><ul class="submenu">
+<li><a href="hexagrams.html">全部卦象</a></li><li><a href="daily-quotes.html">卦辞金句</a></li>
+</ul></li>
+<li class="has-submenu"><a href="wuyun-liuqi-2026.html">五运六气</a><ul class="submenu">
+<li><a href="wuyun-liuqi-2026.html">丙午年专题</a></li>
+</ul></li>
+<li class="has-submenu"><a href="tools.html">易学工具</a><ul class="submenu">
+<li><a href="daily-fortune.html">每日宜忌</a></li><li><a href="ganzhi-converter.html">干支转换器</a></li><li><a href="divination.html">简易起卦</a></li><li><a href="wuxing-chart.html">五行格局</a></li><li><a href="solar-terms.html">节气对照</a></li><li><a href="glossary.html">术语词典</a></li>
+                    <li><a href="bookmarks.html">🔖 我的收藏</a></li>
+</ul></li>
+</ul>
+<button class="search-btn" id="searchBtn" title="搜索">🔍</button>
+</div>
+</header>
+<main>
+<section class="page-banner"><div class="container"><h1>易学工具</h1><p class="breadcrumb"><a href="index.html">首页</a> › 易学工具</p></div></section>
+<section class="page-content"><div class="content-container">
+
+<p style="text-align:center;color:var(--ink-gray);margin-bottom:var(--space-md);">轻量级易学实用工具，纯前端实现，即开即用。仅供传统文化学术研究参考。</p>
+
+<div class="tool-grid">
+
+<a href="daily-fortune.html" class="tool-card">
+<div class="card-icon">📅</div>
+<div class="card-title">每日宜忌</div>
+<div class="card-desc">根据当日干支生成的简化传统宜忌信息，可切换前后日期查看。</div>
+</a>
+
+<a href="ganzhi-converter.html" class="tool-card">
+<div class="card-icon">🔄</div>
+<div class="card-title">干支转换器</div>
+<div class="card-desc">公历日期与干支纪年实时互转，含四柱、生肖、纳音五行查询。</div>
+</a>
+
+<a href="divination.html" class="tool-card">
+<div class="card-icon">🎲</div>
+<div class="card-title">简易起卦</div>
+<div class="card-desc">三枚硬币模拟传统金钱卦，逐爻生成卦象，可跳转详细解读。</div>
+</a>
+
+<a href="wuxing-chart.html" class="tool-card">
+<div class="card-icon">⚖️</div>
+<div class="card-title">五行格局</div>
+<div class="card-desc">输入干支查询五行属性、阴阳、纳音及生克关系对比。</div>
+</a>
+
+<a href="solar-terms.html" class="tool-card">
+<div class="card-icon">🌿</div>
+<div class="card-title">节气对照</div>
+<div class="card-desc">选择年份查看全年24节气时间表及五运六气标注。</div>
+</a>
+
+<a href="glossary.html" class="tool-card">
+<div class="card-icon">📖</div>
+<div class="card-title">术语词典</div>
+<div class="card-desc">易学40+核心术语速查，按拼音首字母排序。</div>
+</a>
+
+</div>
+
+<p style="text-align:center;font-size:0.8rem;color:var(--ink-light);">
+所有工具均为纯前端实现，数据本地计算，无需网络请求。数据仅供学术研究参考。
+</p>
+
+</div></section>
+</main>
+<footer class="site-footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>易学书院</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-align:left;">专注易经国学哲学、传统文化科普，弘扬中华经典智慧。以文化为根，以哲学为本。</p></div>
+<div class="footer-col"><h4>快速导航</h4><ul><li><a href="index.html">首页</a></li><li><a href="basics.html">易经入门</a></li><li><a href="hexagrams.html">六十四卦全解</a></li></ul></div>
+<div class="footer-col"><h4>常用工具</h4><ul><li><a href="daily-fortune.html">每日宜忌</a></li><li><a href="ganzhi-converter.html">干支转换</a></li><li><a href="divination.html">简易起卦</a></li><li><a href="glossary.html">术语词典</a></li>
+                    <li><a href="bookmarks.html">🔖 我的收藏</a></li></ul></div>
+<div class="footer-col"><h4>关于本站</h4><ul><li><a href="index.html">国学文化平台</a></li><li style="color:rgba(255,255,255,0.3);font-size:0.8rem;">仅供传统文化学习研究</li><li style="color:rgba(255,255,255,0.3);font-size:0.8rem;">坚决反对封建迷信</li></ul></div>
+</div>
+<div class="footer-bottom">© 2026 易学书院 · 传承国学经典 · 弘扬传统文化<br>本站内容仅供学术研究参考，不涉及任何占卜预测服务</div>
+</div></footer>
+<div class="search-overlay" id="searchOverlay"><button class="search-close" id="searchClose">✕</button><div class="search-overlay-inner"><input type="text" id="searchInput" placeholder="搜索易学知识..." autocomplete="off"><div class="search-results"></div></div></div>
+<script src="js/main.js"></script>
+</body>
+</html>

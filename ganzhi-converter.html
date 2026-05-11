@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="干支纪年转换器 - 公历日期与干支纪年实时互转，含四柱、生肖、纳音五行查询。">
+<meta name="keywords" content="干支转换,公历转干支,四柱,生肖,纳音,六十甲子">
+<title>干支纪年转换器 | 周易国学文化学习平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.tool-section{background:var(--paper-dark);border-radius:8px;padding:var(--space-md);margin-bottom:var(--space-md)}
+.tool-section h3{margin-bottom:var(--space-sm);font-family:var(--font-title);letter-spacing:1px}
+.convert-mode{display:flex;gap:0.5rem;margin-bottom:var(--space-md)}
+.convert-mode button{padding:0.5rem 1.2rem;border:1px solid var(--border-light);background:var(--paper);border-radius:6px;cursor:pointer;font-size:0.9rem;color:var(--ink-gray)}
+.convert-mode button.active{background:var(--cinnabar);color:#fff;border-color:var(--cinnabar)}
+.pillar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-sm)}
+.pillar-card{background:var(--paper);border:1px solid var(--border-light);border-radius:6px;padding:var(--space-sm);text-align:center}
+.pillar-card .pillar-label{font-size:0.75rem;color:var(--ink-light);margin-bottom:0.3rem}
+.pillar-card .pillar-value{font-size:1.4rem;font-family:var(--font-title);letter-spacing:2px;color:var(--ink-black)}
+.pillar-card .pillar-sub{font-size:0.8rem;color:var(--ink-gray);margin-top:0.2rem}
+.select-row{display:flex;gap:var(--space-sm);flex-wrap:wrap;align-items:center}
+.select-row select{padding:0.5rem;border:1px solid var(--border-light);border-radius:4px;font-size:0.95rem;background:var(--paper);color:var(--ink-black)}
+.result-box{background:var(--paper);border:1px solid var(--border-light);border-radius:6px;padding:var(--space-md);margin-top:var(--space-sm)}
+.result-box .big-text{font-size:1.6rem;font-family:var(--font-title);letter-spacing:4px;text-align:center;padding:var(--space-sm) 0}
+.year-list{display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center}
+.year-list span{padding:0.2rem 0.6rem;background:var(--paper-dark);border-radius:3px;font-size:0.85rem}
+</style>
+</head>
+<body>
+<div class="announcement-bar">🌿 易学书院 · 专注国学哲学 · 弘扬传统文化 · 2026 丙午年五运六气专题已上线</div>
+<header class="site-header">
+<div class="header-inner">
+<div class="logo">
+<svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="none" stroke="#c23b22" stroke-width="1.5" opacity="0.4"/><path d="M50 15 A35 35 0 0 0 50 85 A35 35 0 0 1 50 15" fill="#1a1a1a" opacity="0.8"/><circle cx="50" cy="35" r="6" fill="#f5f0e8"/><circle cx="50" cy="65" r="6" fill="#1a1a1a" opacity="0.8"/></svg>
+<div><div class="logo-text"><span>易</span>学书院</div><div class="logo-sub">YIJING ACADEMY</div></div>
+</div>
+<button class="nav-toggle" id="navToggle">☰</button>
+<ul class="nav-menu" id="navMenu">
+<li><a href="index.html">首页</a></li>
+<li class="has-submenu"><a href="basics.html">易学入门</a><ul class="submenu">
+<li><a href="basics.html">入门基础</a></li><li><a href="yinyang-bagua.html">阴阳八卦</a></li><li><a href="wuxing-ganzhi.html">五行干支</a></li><li><a href="liuyao.html">六爻入门</a></li><li><a href="glossary.html">术语速查</a></li>
+</ul></li>
+<li class="has-submenu"><a href="hexagrams.html">六十四卦</a><ul class="submenu">
+<li><a href="hexagrams.html">全部卦象</a></li><li><a href="daily-quotes.html">卦辞金句</a></li>
+</ul></li>
+<li class="has-submenu"><a href="wuyun-liuqi-2026.html">五运六气</a><ul class="submenu">
+<li><a href="wuyun-liuqi-2026.html">丙午年专题</a></li>
+</ul></li>
+<li class="has-submenu"><a href="tools.html">易学工具</a><ul class="submenu">
+<li><a href="daily-fortune.html">每日宜忌</a></li><li><a href="ganzhi-converter.html">干支转换器</a></li><li><a href="divination.html">简易起卦</a></li><li><a href="wuxing-chart.html">五行格局</a></li><li><a href="solar-terms.html">节气对照</a></li>
+</ul></li>
+</ul>
+<button class="search-btn" id="searchBtn" title="搜索">🔍</button>
+</div>
+</header>
+<main>
+<section class="page-banner"><div class="container"><h1>干支纪年转换器</h1><p class="breadcrumb"><a href="index.html">首页</a> › <a href="tools.html">易学工具</a> › 干支纪年转换器</p></div></section>
+<section class="page-content"><div class="content-container">
+
+<div class="convert-mode">
+<button class="mode-btn active" data-mode="date2gan">公历 → 干支</button>
+<button class="mode-btn" data-mode="gan2year">干支 → 年份</button>
+</div>
+
+<div id="date2ganPanel" class="tool-section">
+<h3>📅 选择公历日期</h3>
+<div class="select-row">
+<label>日期：</label>
+<input type="date" id="datePicker" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:4px;font-size:0.95rem;background:var(--paper)">
+<label style="margin-left:1rem;">时辰：</label>
+<select id="hourSelect">
+<option value="-1">— 不选 —</option>
+<option value="0">子时 (23-01)</option><option value="1">丑时 (01-03)</option>
+<option value="2">寅时 (03-05)</option><option value="3">卯时 (05-07)</option>
+<option value="4">辰时 (07-09)</option><option value="5">巳时 (09-11)</option>
+<option value="6">午时 (11-13)</option><option value="7">未时 (13-15)</option>
+<option value="8">申时 (15-17)</option><option value="9">酉时 (17-19)</option>
+<option value="10">戌时 (19-21)</option><option value="11">亥时 (21-23)</option>
+</select>
+</div>
+<div id="dateResult" class="result-box" style="margin-top:var(--space-md);">
+<div class="pillar-grid">
+<div class="pillar-card"><div class="pillar-label">年柱</div><div class="pillar-value" id="yPillar">—</div><div class="pillar-sub" id="ySub">—</div></div>
+<div class="pillar-card"><div class="pillar-label">月柱</div><div class="pillar-value" id="mPillar">—</div><div class="pillar-sub" id="mSub">—</div></div>
+<div class="pillar-card"><div class="pillar-label">日柱</div><div class="pillar-value" id="dPillar">—</div><div class="pillar-sub" id="dSub">—</div></div>
+<div class="pillar-card"><div class="pillar-label">时柱</div><div class="pillar-value" id="hPillar">—</div><div class="pillar-sub" id="hSub">—</div></div>
+</div>
+<div style="text-align:center;margin-top:var(--space-sm);color:var(--ink-gray);font-size:0.9rem;">
+生肖：<span id="sxDisplay">—</span> &nbsp;|&nbsp; 纳音：<span id="nyDisplay">—</span>
+</div>
+</div>
+</div>
+
+<div id="gan2yearPanel" class="tool-section" style="display:none;">
+<h3>🔍 干支查年份</h3>
+<div class="select-row">
+<label>天干：</label>
+<select id="ganSelect"></select>
+<label>地支：</label>
+<select id="zhiSelect"></select>
+</div>
+<div id="yearResult" class="result-box">
+<div class="big-text" id="ganzhiDisplay">—</div>
+<div id="yearList" class="year-list"></div>
+</div>
+</div>
+
+<p style="text-align:center;font-size:0.8rem;color:var(--ink-light);margin:var(--space-md) 0;">仅供传统文化学术研究参考</p>
+
+<div style="text-align:center;padding:var(--space-sm) 0;border-top:1px solid var(--border-light);font-size:0.85rem;">
+<a href="daily-fortune.html" style="color:var(--cinnabar);text-decoration:none;">← 每日宜忌</a>
+<span style="margin:0 0.8rem;color:var(--border-light);">|</span>
+<a href="divination.html" style="color:var(--cinnabar);text-decoration:none;">简易起卦 →</a>
+<span style="margin:0 0.8rem;color:var(--border-light);">|</span>
+<a href="wuxing-chart.html" style="color:var(--cinnabar);text-decoration:none;">五行格局</a>
+<span style="margin:0 0.8rem;color:var(--border-light);">|</span>
+<a href="solar-terms.html" style="color:var(--cinnabar);text-decoration:none;">节气对照</a>
+</div>
+
+</div></section>
+</main>
+<footer class="site-footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>易学书院</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-align:left;">专注易经国学哲学、传统文化科普，弘扬中华经典智慧。以文化为根，以哲学为本。</p></div>
+<div class="footer-col"><h4>快速导航</h4><ul><li><a href="index.html">首页</a></li><li><a href="basics.html">易经入门</a></li><li><a href="hexagrams.html">六十四卦全解</a></li><li><a href="yinyang-bagua.html">阴阳八卦</a></li><li><a href="wuxing-ganzhi.html">五行干支</a></li></ul></div>
+<div class="footer-col"><h4>常用工具</h4><ul><li><a href="daily-fortune.html">每日宜忌</a></li><li><a href="ganzhi-converter.html">干支转换</a></li><li><a href="divination.html">简易起卦</a></li><li><a href="glossary.html">术语词典</a></li>
+                    <li><a href="bookmarks.html">🔖 我的收藏</a></li></ul></div>
+<div class="footer-col"><h4>关于本站</h4><ul><li><a href="index.html">国学文化平台</a></li><li style="color:rgba(255,255,255,0.3);font-size:0.8rem;">仅供传统文化学习研究</li><li style="color:rgba(255,255,255,0.3);font-size:0.8rem;">坚决反对封建迷信</li></ul></div>
+</div>
+<div class="footer-bottom">© 2026 易学书院 · 传承国学经典 · 弘扬传统文化<br>本站内容仅供学术研究参考，不涉及任何占卜预测服务</div>
+</div></footer>
+<div class="search-overlay" id="searchOverlay"><button class="search-close" id="searchClose">✕</button><div class="search-overlay-inner"><input type="text" id="searchInput" placeholder="搜索易学知识..." autocomplete="off"><div class="search-results"></div></div></div>
+<script src="js/tools-data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+var T = window.TOOLS_DATA;
+
+// 填充干支选择下拉
+var ganSel = document.getElementById('ganSelect');
+var zhiSel = document.getElementById('zhiSelect');
+T.TIAN_GAN.forEach(function(g) { var o = document.createElement('option'); o.value = g; o.textContent = g; ganSel.appendChild(o); });
+T.DI_ZHI.forEach(function(z) { var o = document.createElement('option'); o.value = z; o.textContent = z; zhiSel.appendChild(o); });
+
+var datePicker = document.getElementById('datePicker');
+
+function calcHourGan(dayGan, hourIdx) {
+    var map = {甲:0,乙:2,丙:4,丁:6,戊:8,己:0,庚:2,辛:4,壬:6,癸:8};
+    var start = map[dayGan] || 0;
+    return T.TIAN_GAN[(start + hourIdx) % 10];
+}
+
+function updateDateResult() {
+    if (!datePicker.value) return;
+    var parts = datePicker.value.split('-');
+    var y = parseInt(parts[0]), m = parseInt(parts[1]), d = parseInt(parts[2]);
+    var dt = new Date(y, m - 1, d);
+
+    var yg = T.calcYearGanzhi(y);
+    var dg = T.calcDayGanzhi(dt);
+    var mg = T.calcMonthGanzhi(y, m);
+    var hourIdx = parseInt(document.getElementById('hourSelect').value);
+
+    document.getElementById('yPillar').textContent = yg.gan + yg.zhi;
+    document.getElementById('ySub').textContent = yg.shengxiao + ' · ' + T.GAN_WUXING[yg.gan];
+    document.getElementById('mPillar').textContent = mg.gan + mg.zhi;
+    document.getElementById('mSub').textContent = T.GAN_WUXING[mg.gan];
+    document.getElementById('dPillar').textContent = dg.gan + dg.zhi;
+    document.getElementById('dSub').textContent = T.GAN_WUXING[dg.gan] + T.ZHI_WUXING[dg.zhi] + ' · ' + (dg.nayin || '—');
+    document.getElementById('sxDisplay').textContent = yg.shengxiao;
+    document.getElementById('nyDisplay').textContent = dg.nayin || '—';
+
+    if (hourIdx >= 0) {
+        var hg = calcHourGan(dg.gan, hourIdx);
+        document.getElementById('hPillar').textContent = hg + T.DI_ZHI[hourIdx];
+        document.getElementById('hSub').textContent = T.GAN_WUXING[hg];
+    } else {
+        document.getElementById('hPillar').textContent = '—';
+        document.getElementById('hSub').textContent = '选时辰后显示';
+    }
+}
+
+function updateYearResult() {
+    var g = ganSel.value, z = zhiSel.value;
+    var gi = T.TIAN_GAN.indexOf(g), zi = T.DI_ZHI.indexOf(z);
+    document.getElementById('ganzhiDisplay').textContent = g + z;
+    var years = [];
+    for (var y = 1900; y <= 2100; y++) {
+        if ((y - 4) % 10 === gi && (y - 4) % 12 === zi) years.push(y);
+    }
+    document.getElementById('yearList').innerHTML = years.map(function(y) {
+        return '<span>' + y + '年</span>';
+    }).join('');
+}
+
+// 模式切换
+document.querySelectorAll('.mode-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.getElementById('date2ganPanel').style.display = btn.dataset.mode === 'date2gan' ? 'block' : 'none';
+        document.getElementById('gan2yearPanel').style.display = btn.dataset.mode === 'date2gan' ? 'none' : 'block';
+    });
+});
+
+// 设置默认今天
+var now = new Date();
+datePicker.value = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+updateDateResult();
+
+datePicker.addEventListener('change', updateDateResult);
+document.getElementById('hourSelect').addEventListener('change', updateDateResult);
+ganSel.addEventListener('change', updateYearResult);
+zhiSel.addEventListener('change', updateYearResult);
+updateYearResult();
+
+// 导航切换
+document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navMenu').classList.toggle('active');
+});
+});
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

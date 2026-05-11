@@ -1179,3 +1179,209 @@ a:hover {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--slate-light) 10%, var(--slate-light) 90%, transparent);
 }
+
+/* --- 每日卡片交互按钮 --- */
+.daily-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.3rem;
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-light);
+}
+.daily-actions button {
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.78rem;
+    font-family: var(--font-sans);
+    color: var(--ink-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+.daily-actions button:hover {
+    border-color: var(--cinnabar);
+    color: var(--cinnabar);
+    background: rgba(139,69,19,0.04);
+}
+.daily-actions button.bookmarked {
+    color: var(--cinnabar);
+    border-color: var(--cinnabar);
+}
+
+/* --- 每日卦象 --- */
+.daily-hexagram {
+    text-align: center;
+    padding: var(--space-md);
+    background: var(--paper-dark);
+    border-radius: 8px;
+    margin-top: var(--space-md);
+}
+.daily-hexagram .hex-symbol {
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem;
+}
+.daily-hexagram .hex-name {
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--ink-black);
+}
+.daily-hexagram .hex-desc {
+    font-size: 0.85rem;
+    color: var(--ink-gray);
+    margin-top: 0.3rem;
+}
+.daily-hexagram .hex-link {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    padding: 0.35rem 1rem;
+    border: 1px solid var(--cinnabar);
+    border-radius: 6px;
+    color: var(--cinnabar);
+    font-size: 0.82rem;
+    font-family: var(--font-sans);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+.daily-hexagram .hex-link:hover {
+    background: var(--cinnabar);
+    color: #fff;
+}
+
+/* --- Toast 轻提示 --- */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.6rem 1.5rem;
+    background: var(--ink-black);
+    color: var(--paper);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-family: var(--font-sans);
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 10000;
+    pointer-events: none;
+}
+.toast.show {
+    opacity: 0.85;
+}
+
+/* --- 回到顶部（升级） --- */
+.back-to-top {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--ink-gray);
+}
+.back-to-top.visible {
+    opacity: 0.7;
+    visibility: visible;
+}
+.back-to-top:hover {
+    opacity: 1;
+    border-color: var(--cinnabar);
+    color: var(--cinnabar);
+    transform: translateY(-2px);
+}
+
+/* --- 工具浮窗 --- */
+.tool-float-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    color: var(--ink-gray);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+.tool-float-btn:hover {
+    border-color: var(--cinnabar);
+    color: var(--cinnabar);
+}
+.tool-float-panel {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: var(--space-sm);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    min-width: 150px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.tool-float-panel.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.tool-float-panel a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    color: var(--ink-gray);
+    font-size: 0.82rem;
+    font-family: var(--font-sans);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+.tool-float-panel a:hover {
+    background: rgba(139,69,19,0.04);
+    color: var(--cinnabar);
+}
+.tool-float-panel .panel-divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 0.3rem 0;
+}
+.tool-float-panel .panel-title {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    padding: 0.3rem 0.8rem;
+    font-family: var(--font-sans);
+    letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+    .back-to-top { bottom: 4.5rem; right: 1rem; width: 40px; height: 40px; }
+    .tool-float-btn { bottom: 1rem; right: 1rem; width: 40px; height: 40px; }
+    .tool-float-panel { bottom: 4.5rem; right: 1rem; min-width: 140px; }
+}
