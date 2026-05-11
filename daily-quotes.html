@@ -266,6 +266,39 @@
 </p>
 
 </div></section>
+<div id="pageFooter_daily"></div>
+
+<div class="fade-divider"></div>
+
+<div class="feedback-section" id="feedbackSection_daily">
+    <div class="fb-label">这篇文章对你有帮助吗？</div>
+    <div class="fb-btns">
+        <button class="fb-btn" data-val="helpful">有用</button>
+        <button class="fb-btn" data-val="neutral">一般</button>
+        <button class="fb-btn" data-val="confused">没懂</button>
+    </div>
+</div>
+
+<div class="fade-divider"></div>
+
+<div class="message-section" id="messageSection_daily">
+    <div class="msg-title">🌿 静思小笺</div>
+    <div class="msg-subtitle">请以温厚之心，讨论学问之道</div>
+    <div class="msg-input-area">
+        <input class="msg-input" placeholder="写下你的感悟…（32字以内）" maxlength="32">
+        <button class="msg-submit">☯ 留笺</button>
+    </div>
+    <div class="msg-list"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.initPageFooter) initPageFooter({pageId: 'daily', path: '六十四卦 → 卦辞金句', currentUrl: 'daily-quotes.html'});
+    if (window.initFeedback) initFeedback('daily');
+    if (window.initMessages) initMessages('daily');
+});
+</script>
+
 </main>
 <footer class="site-footer">
     <div class="container">

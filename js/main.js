@@ -476,5 +476,183 @@ document.addEventListener('DOMContentLoaded', function() {
         e.stopPropagation();
     });
 
+    // =========================================
+    // 9. 轻反馈
+    // =========================================
+    function initFeedback(pageId) {
+        var container = document.getElementById('feedbackSection_' + pageId);
+        if (!container) return;
+        var key = 'yijing_fb_' + pageId;
+        var current = localStorage.getItem(key) || '';
+
+        container.querySelectorAll('.fb-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var val = this.getAttribute('data-val');
+                if (current === val) {
+                    localStorage.removeItem(key);
+                    current = '';
+                    container.querySelectorAll('.fb-btn').forEach(function(b) { b.classList.remove('active'); });
+                } else {
+                    localStorage.setItem(key, val);
+                    current = val;
+                    container.querySelectorAll('.fb-btn').forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                }
+            });
+            if (btn.getAttribute('data-val') === current) btn.classList.add('active');
+        });
+    }
+    window.initFeedback = initFeedback;
+
+    // =========================================
+    // 10. 读书笔记
+    // =========================================
+    var noteBtn = document.createElement('button');
+    noteBtn.className = 'note-float'; noteBtn.innerHTML = '✒';
+    noteBtn.title = '读书笔记';
+    document.body.appendChild(noteBtn);
+
+    var notePanel = document.createElement('div');
+    notePanel.className = 'note-panel';
+    notePanel.innerHTML =
+        '<div class="np-title">✒ 读书笔记</div>' +
+        '<textarea id="noteTextarea" placeholder="记录你的感悟…（限200字）" maxlength="200"></textarea>' +
+        '<div class="np-char-count"><span id="noteCharCount">0</span>/200</div>' +
+        '<div class="np-actions">' +
+        '<button class="np-save" id="noteSaveBtn">💾 保存</button>' +
+        '<button class="np-view" id="noteViewBtn">📖 全部笔记</button>' +
+        '</div>';
+    document.body.appendChild(notePanel);
+
+    noteBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        notePanel.classList.toggle('open');
+        if (notePanel.classList.contains('open')) {
+            document.getElementById('noteTextarea').focus();
+        }
+    });
+    document.addEventListener('click', function() {
+        notePanel.classList.remove('open');
+    });
+    notePanel.addEventListener('click', function(e) { e.stopPropagation(); });
+
+    document.getElementById('noteSaveBtn').addEventListener('click', function() {
+        var ta = document.getElementById('noteTextarea');
+        var text = ta.value.trim();
+        if (!text) { showToast('请先写点内容'); return; }
+        var pageTitle = document.querySelector('title') ? document.querySelector('title').textContent.replace(' | 周易国学文化学习平台', '') : window.location.pathname;
+        var notes = []; try { notes = JSON.parse(localStorage.getItem('yijing_notes') || '[]'); } catch(e) {}
+        notes.unshift({
+            id: 'note-' + Date.now(), pageUrl: window.location.pathname.split('/').pop() || 'index.html',
+            pageTitle: pageTitle, text: text, createdAt: new Date().toISOString()
+        });
+        localStorage.setItem('yijing_notes', JSON.stringify(notes));
+        ta.value = ''; document.getElementById('noteCharCount').textContent = '0';
+        showToast('✒ 笔记已保存');
+        notePanel.classList.remove('open');
+    });
+
+    document.getElementById('noteViewBtn').addEventListener('click', function() {
+        window.location.href = 'notes.html';
+    });
+
+    document.getElementById('noteTextarea').addEventListener('input', function() {
+        document.getElementById('noteCharCount').textContent = this.value.length;
+    });
+
+    // =========================================
+    // 11. 静思小笺（留言区）
+    // =========================================
+    function initMessages(pageId) {
+        var container = document.getElementById('messageSection_' + pageId);
+        if (!container) return;
+        var input = container.querySelector('.msg-input');
+        var btn = container.querySelector('.msg-submit');
+        var list = container.querySelector('.msg-list');
+        var key = 'yijing_msg_' + pageId;
+
+        function render() {
+            var data = []; try { data = JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) {}
+            if (data.length === 0) {
+                list.innerHTML = '<div class="msg-empty">🌿 暂无学友札记，做第一个留言的人</div>';
+                return;
+            }
+            list.innerHTML = data.slice(0, 10).map(function(item) {
+                var time = new Date(item.time);
+                var timeStr = time.getFullYear() + '-' + String(time.getMonth()+1).padStart(2,'0') + '-' + String(time.getDate()).padStart(2,'0') + ' ' + String(time.getHours()).padStart(2,'0') + ':' + String(time.getMinutes()).padStart(2,'0');
+                return '<div class="msg-item">' +
+                    '<button class="msg-del" data-id="' + item.id + '">✕</button>' +
+                    item.text +
+                    '<div class="msg-time">' + timeStr + '</div></div>';
+            }).join('');
+            list.querySelectorAll('.msg-del').forEach(function(del) {
+                del.addEventListener('click', function() {
+                    var id = this.getAttribute('data-id');
+                    var items = []; try { items = JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) {}
+                    localStorage.setItem(key, JSON.stringify(items.filter(function(i) { return i.id !== id; })));
+                    render();
+                });
+            });
+        }
+
+        btn.addEventListener('click', function() {
+            var text = input.value.trim();
+            if (!text) return;
+            if (text.length > 32) { showToast('内容不超过32字'); return; }
+            var items = []; try { items = JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) {}
+            items.unshift({ id: 'm-' + Date.now(), text: text, time: Date.now() });
+            localStorage.setItem(key, JSON.stringify(items.slice(0, 50)));
+            input.value = '';
+            render();
+            showToast('☯ 已留笺');
+        });
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { e.preventDefault(); btn.click(); }
+        });
+        render();
+    }
+    window.initMessages = initMessages;
+
+    // =========================================
+    // 12. 页面底部通用区块（路径+相关推荐）
+    // =========================================
+    function initPageFooter(config) {
+        var container = document.getElementById('pageFooter_' + config.pageId);
+        if (!container) return;
+
+        // 学习路径定位
+        var pathHtml = '<div class="path-card">' +
+            '<div class="path-icon">📖</div>' +
+            '<div class="path-info"><div class="path-label">学习路径</div>' +
+            '<div class="path-trail">' + config.path + '</div></div>' +
+            '<div class="path-links">';
+        if (config.prevUrl) pathHtml += '<a href="' + config.prevUrl + '">← 上一节</a>';
+        if (config.nextUrl) pathHtml += '<a href="' + config.nextUrl + '">下一节 →</a>';
+        pathHtml += '</div></div>';
+
+        // 相关推荐（基于搜索索引标签匹配）
+        var relatedHtml = '<div class="related-section"><div class="related-title">— 相关推荐 —</div><div class="related-grid" id="relatedGrid_' + config.pageId + '"></div></div>';
+
+        container.innerHTML = pathHtml + relatedHtml;
+
+        // 动态渲染相关推荐
+        var grid = document.getElementById('relatedGrid_' + config.pageId);
+        if (grid) {
+            var idx = window._SEARCH_INDEX || [];
+            var current = idx.find(function(i) { return i.url === config.currentUrl; });
+            var tags = (current && current.tags) || [];
+            var scored = idx.filter(function(i) { return i.url !== config.currentUrl; }).map(function(i) {
+                var overlap = (i.tags || []).filter(function(t) { return tags.indexOf(t) >= 0; }).length;
+                return { item: i, score: overlap };
+            }).sort(function(a, b) { return b.score - a.score; }).slice(0, 3);
+            grid.innerHTML = scored.map(function(s) {
+                return '<a class="related-card" href="' + s.item.url + '">' +
+                    '<div class="rc-title">' + s.item.title + '</div>' +
+                    '<div class="rc-desc">' + (s.item.excerpt || '') + '</div></a>';
+            }).join('');
+        }
+    }
+    window.initPageFooter = initPageFooter;
+
     console.log('🧿 易学国学文化平台已加载 — 传承经典，弘扬国学');
 });

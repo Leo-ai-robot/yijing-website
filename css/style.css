@@ -1384,4 +1384,116 @@ a:hover {
     .back-to-top { bottom: 4.5rem; right: 1rem; width: 40px; height: 40px; }
     .tool-float-btn { bottom: 1rem; right: 1rem; width: 40px; height: 40px; }
     .tool-float-panel { bottom: 4.5rem; right: 1rem; min-width: 140px; }
+    .path-card { flex-direction: column; text-align: center; }
+    .note-float { right: 0.8rem; width: 40px; height: 40px; font-size: 1rem; }
+    .note-panel { right: 0.8rem; left: 0.8rem; width: auto; }
 }
+
+/* --- 学习路径定位 --- */
+.path-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--paper-dark);
+    border-radius: 8px;
+    margin: var(--space-md) 0;
+    border: 1px solid var(--border-light);
+}
+.path-card .path-icon { font-size: 1.3rem; flex-shrink: 0; }
+.path-card .path-info { flex: 1; min-width: 0; }
+.path-card .path-label { font-size: 0.75rem; color: var(--ink-light); font-family: var(--font-sans); letter-spacing: 1px; }
+.path-card .path-trail { font-size: 0.9rem; color: var(--ink-black); font-family: var(--font-title); letter-spacing: 1px; margin-top: 0.2rem; }
+.path-card .path-links { display: flex; gap: 0.5rem; flex-shrink: 0; }
+.path-card .path-links a {
+    padding: 0.35rem 0.8rem; border: 1px solid var(--cinnabar); border-radius: 6px;
+    color: var(--cinnabar); font-size: 0.78rem; font-family: var(--font-sans);
+    text-decoration: none; letter-spacing: 1px; transition: all 0.2s; white-space: nowrap;
+}
+.path-card .path-links a:hover { background: var(--cinnabar); color: #fff; }
+
+/* --- 相关推荐 --- */
+.related-section { margin: var(--space-md) 0; }
+.related-section .related-title { font-size: 0.82rem; color: var(--ink-light); font-family: var(--font-sans); letter-spacing: 2px; margin-bottom: var(--space-sm); text-align: center; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+.related-card {
+    padding: var(--space-sm); background: var(--paper); border: 1px solid var(--border-light);
+    border-radius: 6px; text-decoration: none; color: inherit; transition: all 0.2s; text-align: center;
+}
+.related-card:hover { border-color: var(--cinnabar); }
+.related-card .rc-title { font-size: 0.85rem; color: var(--ink-black); font-family: var(--font-title); letter-spacing: 1px; }
+.related-card .rc-desc { font-size: 0.75rem; color: var(--ink-gray); margin-top: 0.2rem; }
+@media (max-width: 600px) { .related-grid { grid-template-columns: 1fr; } }
+
+/* --- 轻反馈 --- */
+.feedback-section { text-align: center; margin: var(--space-md) 0; }
+.feedback-section .fb-label { font-size: 0.82rem; color: var(--ink-light); font-family: var(--font-sans); letter-spacing: 1px; margin-bottom: var(--space-xs); }
+.feedback-section .fb-btns { display: flex; gap: 0.5rem; justify-content: center; }
+.feedback-section .fb-btn {
+    padding: 0.3rem 1rem; border: 1px solid var(--border-light); border-radius: 6px;
+    background: var(--paper); color: var(--ink-gray); font-size: 0.8rem; font-family: var(--font-sans);
+    cursor: pointer; transition: all 0.2s; letter-spacing: 1px;
+}
+.feedback-section .fb-btn:hover { border-color: var(--cinnabar); color: var(--cinnabar); }
+.feedback-section .fb-btn.active { background: var(--cinnabar); color: #fff; border-color: var(--cinnabar); }
+.feedback-section .fb-thanks { font-size: 0.78rem; color: var(--ink-light); margin-top: var(--space-xs); }
+
+/* --- 读书笔记浮动入口 --- */
+.note-float {
+    position: fixed; bottom: 5rem; right: 5.5rem; width: 40px; height: 40px;
+    border-radius: 50%; background: var(--paper); border: 1px solid var(--border-light);
+    cursor: pointer; z-index: 998; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; transition: all 0.3s ease; color: var(--ink-gray);
+    opacity: 0.6; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.note-float:hover { opacity: 1; border-color: var(--cinnabar); color: var(--cinnabar); }
+.note-panel {
+    position: fixed; bottom: 9rem; right: 1.5rem; width: 320px;
+    background: var(--paper); border: 1px solid var(--border-light); border-radius: 8px;
+    padding: var(--space-sm); z-index: 998; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    display: none;
+}
+.note-panel.open { display: block; }
+.note-panel .np-title { font-size: 0.82rem; color: var(--ink-black); font-family: var(--font-title); letter-spacing: 1px; margin-bottom: var(--space-xs); }
+.note-panel textarea {
+    width: 100%; height: 80px; padding: 0.5rem; border: 1px solid var(--border-light);
+    border-radius: 4px; font-size: 0.82rem; font-family: var(--font-body); color: var(--ink-black);
+    background: var(--paper-light); resize: vertical; line-height: 1.6;
+}
+.note-panel textarea:focus { outline: none; border-color: var(--cinnabar); }
+.note-panel .np-actions { display: flex; gap: 0.5rem; margin-top: var(--space-xs); }
+.note-panel .np-actions button {
+    padding: 0.3rem 1rem; border-radius: 4px; font-size: 0.8rem; font-family: var(--font-sans);
+    cursor: pointer; letter-spacing: 1px; transition: all 0.2s;
+}
+.np-save { background: var(--cinnabar); color: #fff; border: none; }
+.np-save:hover { opacity: 0.85; }
+.np-view { background: var(--paper); color: var(--ink-gray); border: 1px solid var(--border-light); }
+.np-view:hover { border-color: var(--cinnabar); color: var(--cinnabar); }
+.np-char-count { font-size: 0.7rem; color: var(--ink-light); text-align: right; margin-top: 0.2rem; }
+
+/* --- 静思小笺（留言区）--- */
+.message-section { margin: var(--space-md) 0; padding-top: var(--space-md); }
+.message-section .msg-title { text-align: center; font-size: 0.9rem; color: var(--ink-black); font-family: var(--font-title); letter-spacing: 2px; margin-bottom: 0.2rem; }
+.message-section .msg-subtitle { text-align: center; font-size: 0.75rem; color: var(--ink-light); font-family: var(--font-sans); margin-bottom: var(--space-sm); }
+.msg-input-area { display: flex; gap: 0.5rem; margin-bottom: var(--space-sm); }
+.msg-input-area input {
+    flex: 1; padding: 0.5rem 0.8rem; border: 1px solid var(--border-light); border-radius: 6px;
+    font-size: 0.82rem; font-family: var(--font-body); color: var(--ink-black); background: var(--paper);
+}
+.msg-input-area input:focus { outline: none; border-color: var(--cinnabar); }
+.msg-input-area button {
+    padding: 0.5rem 1rem; background: var(--cinnabar); color: #fff; border: none;
+    border-radius: 6px; font-size: 0.8rem; font-family: var(--font-sans); cursor: pointer; letter-spacing: 1px; white-space: nowrap;
+}
+.msg-input-area button:hover { opacity: 0.85; }
+.msg-list { max-height: 300px; overflow-y: auto; }
+.msg-item {
+    padding: 0.5rem 0; border-bottom: 1px solid var(--border-light); font-size: 0.82rem;
+    line-height: 1.6; color: var(--ink-gray);
+}
+.msg-item:last-child { border-bottom: none; }
+.msg-item .msg-time { font-size: 0.7rem; color: var(--ink-light); font-family: var(--font-sans); }
+.msg-item .msg-del { float: right; background: none; border: none; color: var(--ink-light); cursor: pointer; font-size: 0.72rem; padding: 0.1rem 0.3rem; }
+.msg-item .msg-del:hover { color: #c62828; }
+.msg-empty { text-align: center; padding: var(--space-sm); color: var(--ink-light); font-size: 0.82rem; }

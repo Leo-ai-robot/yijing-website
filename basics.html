@@ -135,6 +135,82 @@
 </p>
 
 </div></section>
+
+<section class="page-content"><div class="content-container">
+<div class="deco-divider"><span class="line"></span><span class="circle"></span><span class="line"></span></div>
+
+<div class="bottom-nav-block">
+    <h2 style="text-align:center;margin-bottom:var(--space-sm);">继续探索易学世界</h2>
+    <p style="text-align:center;color:var(--ink-gray);margin-bottom:var(--space-lg);font-size:0.95rem;">掌握了入门基础，接下来深入了解更多易学知识</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin-bottom:var(--space-lg);">
+        <a href="yinyang-bagua.html" style="display:block;padding:var(--space-md);border:1px solid var(--border-color, #ddd);border-radius:8px;text-decoration:none;color:var(--ink-color, #333);transition:all 0.2s ease;background:var(--bg-light, #fafaf5);text-align:center;">
+            <span style="font-size:2rem;display:block;margin-bottom:var(--space-xs);">☯</span>
+            <strong style="display:block;margin-bottom:4px;">阴阳八卦</strong>
+            <span style="font-size:0.85rem;color:var(--ink-gray);">深入理解阴阳哲学与八卦体系</span>
+        </a>
+        <a href="wuxing-ganzhi.html" style="display:block;padding:var(--space-md);border:1px solid var(--border-color, #ddd);border-radius:8px;text-decoration:none;color:var(--ink-color, #333);transition:all 0.2s ease;background:var(--bg-light, #fafaf5);text-align:center;">
+            <span style="font-size:2rem;display:block;margin-bottom:var(--space-xs);">🪷</span>
+            <strong style="display:block;margin-bottom:4px;">五行干支</strong>
+            <span style="font-size:0.85rem;color:var(--ink-gray);">掌握五行生克与天干地支</span>
+        </a>
+        <a href="hexagrams.html" style="display:block;padding:var(--space-md);border:1px solid var(--border-color, #ddd);border-radius:8px;text-decoration:none;color:var(--ink-color, #333);transition:all 0.2s ease;background:var(--bg-light, #fafaf5);text-align:center;">
+            <span style="font-size:2rem;display:block;margin-bottom:var(--space-xs);">📜</span>
+            <strong style="display:block;margin-bottom:4px;">六十四卦</strong>
+            <span style="font-size:0.85rem;color:var(--ink-gray);">浏览完整的六十四卦体系</span>
+        </a>
+        <a href="liuyao.html" style="display:block;padding:var(--space-md);border:1px solid var(--border-color, #ddd);border-radius:8px;text-decoration:none;color:var(--ink-color, #333);transition:all 0.2s ease;background:var(--bg-light, #fafaf5);text-align:center;">
+            <span style="font-size:2rem;display:block;margin-bottom:var(--space-xs);">🔮</span>
+            <strong style="display:block;margin-bottom:4px;">六爻入门</strong>
+            <span style="font-size:0.85rem;color:var(--ink-gray);">学习六爻卦的构成与解读</span>
+        </a>
+        <a href="glossary.html" style="display:block;padding:var(--space-md);border:1px solid var(--border-color, #ddd);border-radius:8px;text-decoration:none;color:var(--ink-color, #333);transition:all 0.2s ease;background:var(--bg-light, #fafaf5);text-align:center;">
+            <span style="font-size:2rem;display:block;margin-bottom:var(--space-xs);">📖</span>
+            <strong style="display:block;margin-bottom:4px;">术语速查</strong>
+            <span style="font-size:0.85rem;color:var(--ink-gray);">快速查阅易学专业术语</span>
+        </a>
+        <a href="daily-quotes.html" style="display:block;padding:var(--space-md);border:1px solid var(--border-color, #ddd);border-radius:8px;text-decoration:none;color:var(--ink-color, #333);transition:all 0.2s ease;background:var(--bg-light, #fafaf5);text-align:center;">
+            <span style="font-size:2rem;display:block;margin-bottom:var(--space-xs);">✨</span>
+            <strong style="display:block;margin-bottom:4px;">卦辞金句</strong>
+            <span style="font-size:0.85rem;color:var(--ink-gray);">每日一则易经经典语录</span>
+        </a>
+    </div>
+</div>
+
+</div></section>
+
+<div id="pageFooter_basics"></div>
+
+<div class="fade-divider"></div>
+
+<div class="feedback-section" id="feedbackSection_basics">
+    <div class="fb-label">这篇文章对你有帮助吗？</div>
+    <div class="fb-btns">
+        <button class="fb-btn" data-val="helpful">有用</button>
+        <button class="fb-btn" data-val="neutral">一般</button>
+        <button class="fb-btn" data-val="confused">没懂</button>
+    </div>
+</div>
+
+<div class="fade-divider"></div>
+
+<div class="message-section" id="messageSection_basics">
+    <div class="msg-title">🌿 静思小笺</div>
+    <div class="msg-subtitle">请以温厚之心，讨论学问之道</div>
+    <div class="msg-input-area">
+        <input class="msg-input" placeholder="写下你的感悟…（32字以内）" maxlength="32">
+        <button class="msg-submit">☯ 留笺</button>
+    </div>
+    <div class="msg-list"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.initPageFooter) initPageFooter({pageId: 'basics', path: '易学入门 → 入门基础', currentUrl: 'basics.html'});
+    if (window.initFeedback) initFeedback('basics');
+    if (window.initMessages) initMessages('basics');
+});
+</script>
+
 </main>
 <footer class="site-footer">
     <div class="container">

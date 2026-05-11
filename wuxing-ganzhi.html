@@ -135,7 +135,74 @@
     <a href="liuyao.html">下一节：六爻入门 →</a>
 </p>
 
+<div class="fade-divider"></div>
+
+<!-- 底部区块：相关工具与深入学习 -->
+<section class="page-bottom-block" style="margin-top:var(--space-lg);">
+    <div class="bottom-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md);">
+
+        <!-- 相关工具 -->
+        <div class="bottom-card" style="background:var(--paper-dark); border-radius:8px; padding:var(--space-md);">
+            <h3 style="font-family:var(--font-title); letter-spacing:2px; margin-bottom:var(--space-sm); font-size:1.1rem;">🔧 相关工具</h3>
+            <ul style="list-style:none; padding:0; margin:0; font-size:0.95rem; line-height:2.2;">
+                <li><a href="ganzhi-converter.html" style="color:var(--cinnabar); text-decoration:none;">📅 干支转换器</a> — 公历与干支纪年互转</li>
+                <li><a href="wuxing-chart.html" style="color:var(--cinnabar); text-decoration:none;">☯ 五行格局</a> — 五行生克关系图谱</li>
+                <li><a href="solar-terms.html" style="color:var(--cinnabar); text-decoration:none;">🌾 节气对照</a> — 二十四节气与地支对应</li>
+            </ul>
+        </div>
+
+        <!-- 深入学习 -->
+        <div class="bottom-card" style="background:var(--paper-dark); border-radius:8px; padding:var(--space-md);">
+            <h3 style="font-family:var(--font-title); letter-spacing:2px; margin-bottom:var(--space-sm); font-size:1.1rem;">📖 深入学习</h3>
+            <ul style="list-style:none; padding:0; margin:0; font-size:0.95rem; line-height:2.2;">
+                <li><a href="wuyun-liuqi-2026.html" style="color:var(--cinnabar); text-decoration:none;">🌿 五运六气</a> — 2026丙午年气运详解</li>
+                <li><a href="liuyao.html" style="color:var(--cinnabar); text-decoration:none;">⚡ 六爻入门</a> — 六爻卦构成与爻位</li>
+                <li><a href="glossary.html" style="color:var(--cinnabar); text-decoration:none;">📚 术语词典</a> — 易学专业术语速查</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- 面包屑路径 -->
+    <p style="text-align:center; margin-top:var(--space-md); font-size:0.85rem; color:var(--ink-light);">
+        当前位置：<a href="index.html" style="color:var(--ink-gray);">首页</a> › <a href="basics.html" style="color:var(--ink-gray);">易学入门</a> › <strong style="color:var(--cinnabar);">五行干支</strong>
+    </p>
+</section>
+
 </div></section>
+<div id="pageFooter_wuxing"></div>
+
+<div class="fade-divider"></div>
+
+<div class="feedback-section" id="feedbackSection_wuxing">
+    <div class="fb-label">这篇文章对你有帮助吗？</div>
+    <div class="fb-btns">
+        <button class="fb-btn" data-val="helpful">有用</button>
+        <button class="fb-btn" data-val="neutral">一般</button>
+        <button class="fb-btn" data-val="confused">没懂</button>
+    </div>
+</div>
+
+<div class="fade-divider"></div>
+
+<div class="message-section" id="messageSection_wuxing">
+    <div class="msg-title">🌿 静思小笺</div>
+    <div class="msg-subtitle">请以温厚之心，讨论学问之道</div>
+    <div class="msg-input-area">
+        <input class="msg-input" placeholder="写下你的感悟…（32字以内）" maxlength="32">
+        <button class="msg-submit">☯ 留笺</button>
+    </div>
+    <div class="msg-list"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.initPageFooter) initPageFooter({pageId: 'wuxing', path: '易学入门 → 五行干支', currentUrl: 'wuxing-ganzhi.html'});
+    if (window.initFeedback) initFeedback('wuxing');
+    if (window.initMessages) initMessages('wuxing');
+});
+</script>
+
 </main>
 <footer class="site-footer">
     <div class="container">

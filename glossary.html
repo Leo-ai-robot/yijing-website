@@ -244,6 +244,39 @@
 </p>
 
 </div></section>
+<div id="pageFooter_glossary"></div>
+
+<div class="fade-divider"></div>
+
+<div class="feedback-section" id="feedbackSection_glossary">
+    <div class="fb-label">这篇文章对你有帮助吗？</div>
+    <div class="fb-btns">
+        <button class="fb-btn" data-val="helpful">有用</button>
+        <button class="fb-btn" data-val="neutral">一般</button>
+        <button class="fb-btn" data-val="confused">没懂</button>
+    </div>
+</div>
+
+<div class="fade-divider"></div>
+
+<div class="message-section" id="messageSection_glossary">
+    <div class="msg-title">🌿 静思小笺</div>
+    <div class="msg-subtitle">请以温厚之心，讨论学问之道</div>
+    <div class="msg-input-area">
+        <input class="msg-input" placeholder="写下你的感悟…（32字以内）" maxlength="32">
+        <button class="msg-submit">☯ 留笺</button>
+    </div>
+    <div class="msg-list"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.initPageFooter) initPageFooter({pageId: 'glossary', path: '易学工具 → 术语词典', currentUrl: 'glossary.html'});
+    if (window.initFeedback) initFeedback('glossary');
+    if (window.initMessages) initMessages('glossary');
+});
+</script>
+
 </main>
 <footer class="site-footer">
     <div class="container">
